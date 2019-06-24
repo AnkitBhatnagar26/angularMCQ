@@ -1,0 +1,24 @@
+[
+    {
+        "id": 1,
+        "question": "How many planets are there in our solar system?",
+        "options": [
+            "6",
+            "7",
+            "8",
+            "9"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": 2,
+        "question": "How old are you?",
+        "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+        ],
+        "type": "radio"
+    }
+]

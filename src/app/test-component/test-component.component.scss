@@ -1,0 +1,23 @@
+.startTest {
+  padding: 50px 0;
+}
+
+.form-bottom {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin-top: 50px;
+}
+
+.blur {
+  -webkit-filter: blur(10px);
+}
+
+video {
+    position: absolute;
+    top: -10px;
+    right: 80px;
+}
+#canvas {
+    display: none;
+}

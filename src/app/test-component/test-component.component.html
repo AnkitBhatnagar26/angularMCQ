@@ -1,0 +1,49 @@
+<div class="startTest">
+  <div class="container">
+    <div class="text-right">
+      <video #video id="video" width="200" height="200" autoplay></video>
+    </div>
+    <canvas #canvas id="canvas" width="640" height="480"></canvas>
+    <ul>
+      <li *ngFor="let c of captures">
+        <img src="{{ c }}" height="50" />
+      </li>
+    </ul>
+    <form>
+      <div class="form-group">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <li class="page-item" *ngFor="let q of questions">
+                <a class="page-link" (click)="openQuestion(q)">{{q.id}}</a>
+            </li>
+          </ul>
+        </nav>
+        <app-caption-carousel>
+          <div *ngFor="let q of questions;let i = index">
+            <div [ngClass]="{'active': i === slideIndex}" class="carousel-item">
+              <div class="carousel-data">
+                <h2>Question No. {{q.id}}</h2>
+                <div class="container">
+                  <p class="lead">
+                    {{q.question}}
+                  </p>
+                  <div class="custom-control custom-radio" *ngFor="let opt of q.options; let in = index">
+                    <input type="radio" class="custom-control-input" id="defaultGroupExample{{in}}"
+                      name="groupOfDefaultRadios">
+                    <label class="custom-control-label" for="defaultGroupExample{{in}}">{{opt}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </app-caption-carousel>
+        <div class="form-bottom">
+          <button type="button" class="btn btn-outline-secondary" [disabled]="previousBtnDisabled()"
+            (click)="previousSlide()">Previous</button>
+          <button type="button" class="btn btn-primary" [disabled]="nextBtnDisabled()"
+            (click)="nextSlide()">Next</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
