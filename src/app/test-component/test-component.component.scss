@@ -14,14 +14,26 @@
 }
 
 video {
-    position: absolute;
-    top: -10px;
-    right: 80px;
+  position: absolute;
+  top: -10px;
+  right: 80px;
 }
 #canvas {
-    display: none;
+  display: none;
 }
 
 .page-item {
   padding: 0 1px;
+}
+
+@media screen and (max-width: 480px) {
+  .startTest {
+    video {
+      height: 100px;
+      width: 100px;
+      position: absolute;
+      top: 124px;
+      right: 0;
+    }
+  }
 }

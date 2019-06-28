@@ -4,11 +4,6 @@
       <video #video id="video" width="200" height="200" autoplay></video>
     </div>
     <canvas #canvas id="canvas" width="640" height="480"></canvas>
-    <ul>
-      <li *ngFor="let c of captures">
-        <img src="{{ c }}" height="50" />
-      </li>
-    </ul>
     <form>
       <div class="form-group">
         <nav aria-label="Page navigation example">
@@ -56,13 +51,4 @@
     </form>
   </div>
 </div>
-<div style="display: block;">
-  <canvas baseChart 
-    [data]="pieChartData" 
-    [labels]="pieChartLabels" 
-    [chartType]="pieChartType"
-    [options]="pieChartOptions"
-    [plugins]="pieChartPlugins"
-    [legend]="pieChartLegend">
-  </canvas>
-</div>
+

@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { McqComponent } from './mcq/mcq.component';
 import { TestComponentComponent } from './test-component/test-component.component';
+import { FinishTestComponent } from './finish-test/finish-test.component';
 
 const routes: Routes = [
   { path: '', component: McqComponent},
   { path: 'startTest', component: TestComponentComponent },
+  { path: 'finishTest', component: FinishTestComponent },
   { path: '**', redirectTo: '/', pathMatch: 'full' }
 ];
 

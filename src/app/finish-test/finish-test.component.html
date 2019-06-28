@@ -1,0 +1,23 @@
+<div class="container margin-top">
+  <div class="row">
+    <div class="col-sm margin-top">
+      <div class="alert alert-success" role="alert">
+        Thank you for completing your Test. <br />
+        <em>Please find your result next to you</em>
+      </div>
+      <ul class="list-group list-group-horizontal">
+        <li *ngFor="let c of captures">
+          <img class="img-thumbnail" alt="Responsive image" src="{{ c }}" height="50" />
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm">
+
+      <div style="display: block;">
+        <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+          [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>

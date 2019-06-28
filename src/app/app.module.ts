@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { McqComponent } from './mcq/mcq.component';
 import { TestComponentComponent } from './test-component/test-component.component';
 import { CaptionCarouselComponent } from './caption-carousel/caption-carousel.component';
+import { FinishTestComponent } from './finish-test/finish-test.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     McqComponent,
     TestComponentComponent,
-    CaptionCarouselComponent
+    CaptionCarouselComponent,
+    FinishTestComponent
   ],
   imports: [
     BrowserModule,

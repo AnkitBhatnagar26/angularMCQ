@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { McqServiceService } from '../mcq-service.service';
-import { ChartType, ChartOptions } from 'chart.js';
-import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-test-component',
@@ -24,20 +23,10 @@ export class TestComponentComponent implements OnInit {
   answers: Array<{ question: number, answer: string }> = [];
   slideIndex: number = 0;
 
-  // Pie
-  public pieChartOptions: ChartOptions = {
-    responsive: true,
-  };
-  public pieChartLabels: Label[] = ['Right Answers', 'Wrong Answers'];
-  public pieChartData: SingleDataSet = [500, 500];
-  public pieChartType: ChartType = 'pie';
-  public pieChartLegend = true;
-  public pieChartPlugins = [];
+  interval;
 
-  constructor(private mcqServiceService: McqServiceService) {
+  constructor(private mcqServiceService: McqServiceService, private router: Router) {
     this.captures = [];
-    monkeyPatchChartJsTooltip();
-    monkeyPatchChartJsLegend();
   }
 
 
@@ -47,30 +36,30 @@ export class TestComponentComponent implements OnInit {
         this.questions = data;
         console.log(this.questions);
       });
-    // setInterval(() => {
-    //   this.capture();
-    // }, 2000);
+    this.interval = setInterval(() => {
+      this.capture();
+    }, 5000);
   }
 
-  // public ngAfterViewInit() {
-  //   if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-  //     navigator.mediaDevices
-  //       .getUserMedia({ video: true })
-  //       .then((stream) => {
-  //         this.video.nativeElement.srcObject = stream;
-  //         return this.video.nativeElement.play();
-  //       })
-  //   }
-  // }
+  public ngAfterViewInit() {
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices
+        .getUserMedia({ video: true })
+        .then((stream) => {
+          this.video.nativeElement.srcObject = stream;
+          return this.video.nativeElement.play();
+        })
+    }
+  }
 
-  // public capture() {
-  //   this.video.nativeElement.className="blur"
-  //   setTimeout(() => {
-  //     this.video.nativeElement.className = "";
-  //   },200);
-  //   var context = this.canvas.nativeElement.getContext("2d").drawImage(this.video.nativeElement, 0, 0, 640, 480);
-  //   this.captures.push(this.canvas.nativeElement.toDataURL("image/png"));
-  // }
+  public capture() {
+    this.video.nativeElement.className = "blur"
+    setTimeout(() => {
+      this.video.nativeElement.className = "";
+    }, 200);
+    var context = this.canvas.nativeElement.getContext("2d").drawImage(this.video.nativeElement, 0, 0, 640, 480);
+    this.captures.push(this.canvas.nativeElement.toDataURL("image/png"));
+  }
 
   nextSlide() {
     if (this.slideIndex === this.questions.length - 1)
@@ -107,18 +96,15 @@ export class TestComponentComponent implements OnInit {
   }
 
   finishTest() {
-    let rightAnswers = 0;
-    let wrongAnswers = 0;
-    this.answers.map((item) => {
-      if (item['givenAnswer']) {
-        rightAnswers++;
-      }
-      else {
-        wrongAnswers++;
-      }
-    })
-    this.pieChartData = [rightAnswers * 100, wrongAnswers * 100];
-    console.log(this.answers, rightAnswers, wrongAnswers);
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices
+        .getUserMedia({ video: true })
+        .then((stream) => {
+          return this.video.nativeElement.srcObject = stream.getTracks()[0].stop();
+        })
+    }
+    clearInterval(this.interval);
+    this.router.navigate(['/', 'finishTest'], { state: { example: this.answers, captures: this.captures } });
   }
 
   onRadioChange(answer: string, question: number) {
