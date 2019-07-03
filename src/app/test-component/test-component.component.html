@@ -13,6 +13,9 @@
             </li>
           </ul> 
         </nav>
+        <div class="alert alert-danger" role="alert">
+          Please do not press browser back button. Otherwise your exam will start again. Have Fun :)
+        </div>
         <app-caption-carousel>
           <div *ngFor="let q of questions;let i = index">
             <div [ngClass]="{'active': i === slideIndex}" class="carousel-item">
