@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { ChartType, ChartOptions } from 'chart.js';
 import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
 
+import { TestServiceService } from '../Shared/test-service.service';
+
 @Component({
   selector: 'app-finish-test',
   templateUrl: './finish-test.component.html',
@@ -11,7 +13,6 @@ import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsToolt
 export class FinishTestComponent implements OnInit {
 
   public captures: Array<any>;
-  public video: ElementRef;
 
   // Pie
   public pieChartOptions: ChartOptions = {
@@ -23,16 +24,14 @@ export class FinishTestComponent implements OnInit {
   public pieChartLegend = true;
   public pieChartPlugins = [];
   
-
   answers: Array<{ question: number, answer: string, givenAnswer: boolean }> = [];
-  constructor(private router: Router) {
+
+  constructor(private router: Router, private testServiceService: TestServiceService) {
     this.captures = [];
     monkeyPatchChartJsTooltip();
     monkeyPatchChartJsLegend();
-    this.answers = this.router.getCurrentNavigation().extras.state.example;
-    this.captures = this.router.getCurrentNavigation().extras.state.captures;
-    this.video = this.router.getCurrentNavigation().extras.state.video;
-    
+    this.answers = this.testServiceService.getDetails()['answers']; 
+    this.captures = this.testServiceService.getDetails()['captures'];
   }
 
   ngOnInit() {
@@ -47,8 +46,6 @@ export class FinishTestComponent implements OnInit {
       }
     })
     this.pieChartData = [rightAnswers * 100, wrongAnswers * 100];
-
-    
   }
 
 }

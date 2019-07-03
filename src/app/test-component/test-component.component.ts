@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { McqServiceService } from '../mcq-service.service';
+import { HttpServiceService } from '../Shared/http-service.service';
+import { TestServiceService } from '../Shared/test-service.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -25,7 +27,11 @@ export class TestComponentComponent implements OnInit {
 
   interval;
 
-  constructor(private mcqServiceService: McqServiceService, private router: Router) {
+  constructor(
+    private mcqServiceService: McqServiceService,
+    private router: Router,
+    private httpServiceService: HttpServiceService,
+    private testServiceService: TestServiceService) {
     this.captures = [];
   }
 
@@ -38,7 +44,7 @@ export class TestComponentComponent implements OnInit {
       });
     this.interval = setInterval(() => {
       this.capture();
-    }, 5000);
+    }, 2000);
   }
 
   public ngAfterViewInit() {
@@ -77,7 +83,6 @@ export class TestComponentComponent implements OnInit {
         }
       });
     })
-    console.log(this.answers);
   }
 
   previousSlide() {
@@ -96,19 +101,36 @@ export class TestComponentComponent implements OnInit {
   }
 
   finishTest() {
+    console.log(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices
         .getUserMedia({ video: true })
         .then((stream) => {
-          return this.video.nativeElement.srcObject = stream.getTracks()[0].stop();
+          this.video.nativeElement.srcObject = stream.getTracks()[0].stop();
+          clearInterval(this.interval);
+          let detailsObj = {
+            "answers": this.answers,
+            "captures": this.captures
+          };
+          this.testServiceService.setDetails(detailsObj);
+          this.router.navigate(['/', 'finishTest']);
+          // this.sendHttpMail();
         })
     }
-    clearInterval(this.interval);
-    this.router.navigate(['/', 'finishTest'], { state: { example: this.answers, captures: this.captures } });
+
+  }
+
+  sendHttpMail() {
+    let user = {
+      name: '',
+      email: ''
+    }
+    this.httpServiceService.sendMail('/api/v1/sendEmail', user).subscribe((response) => {
+      console.log(response, 'response');
+    });
   }
 
   onRadioChange(answer: string, question: number) {
-    console.log(question, answer);
     this.questions[this.slideIndex]['givenAns'] = true;
     this.answers.map((item, index) => {
       if (item.question == question) {
