@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { PlatformLocation } from '@angular/common';
 import { McqServiceService } from '../mcq-service.service';
 import { HttpServiceService } from '../Shared/http-service.service';
 import { TestServiceService } from '../Shared/test-service.service';
@@ -31,7 +32,13 @@ export class TestComponentComponent implements OnInit {
     private mcqServiceService: McqServiceService,
     private router: Router,
     private httpServiceService: HttpServiceService,
-    private testServiceService: TestServiceService) {
+    private testServiceService: TestServiceService,
+    private location: PlatformLocation
+  ) {
+    location.onPopState((event) => {
+      this.router.navigateByUrl('/startTest');
+      history.forward();
+    });
     this.captures = [];
   }
 
@@ -46,6 +53,7 @@ export class TestComponentComponent implements OnInit {
       this.capture();
     }, 2000);
   }
+
 
   public ngAfterViewInit() {
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -144,5 +152,6 @@ export class TestComponentComponent implements OnInit {
   trackByIndex(index: number, obj: any): any {
     return index;
   }
+
 
 }
