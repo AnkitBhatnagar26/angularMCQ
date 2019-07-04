@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { PlatformLocation } from '@angular/common';
-import { McqServiceService } from '../mcq-service.service';
-import { HttpServiceService } from '../Shared/http-service.service';
-import { TestServiceService } from '../Shared/test-service.service';
+import { HttpServiceService } from '../../Shared/http-service.service';
+import { TestServiceService } from '../../Shared/test-service.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -29,7 +28,6 @@ export class TestComponentComponent implements OnInit {
   interval;
 
   constructor(
-    private mcqServiceService: McqServiceService,
     private router: Router,
     private httpServiceService: HttpServiceService,
     private testServiceService: TestServiceService,
@@ -44,10 +42,9 @@ export class TestComponentComponent implements OnInit {
 
 
   ngOnInit() {
-    this.mcqServiceService.getJSON()
+    this.httpServiceService.getJSON('api/v1/questions')
       .subscribe(data => {
-        this.questions = data;
-        console.log(this.questions);
+        this.questions = data.questions;
       });
     this.interval = setInterval(() => {
       this.capture();
@@ -109,7 +106,6 @@ export class TestComponentComponent implements OnInit {
   }
 
   finishTest() {
-    console.log(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices
         .getUserMedia({ video: true })
@@ -122,7 +118,7 @@ export class TestComponentComponent implements OnInit {
           };
           this.testServiceService.setDetails(detailsObj);
           this.router.navigate(['/', 'finishTest']);
-          // this.sendHttpMail();
+          this.sendHttpMail();
         })
     }
 
@@ -130,10 +126,10 @@ export class TestComponentComponent implements OnInit {
 
   sendHttpMail() {
     let user = {
-      name: '',
-      email: ''
+      name: 'Test Account',
+      email: 'anky.king26@gmail.com'
     }
-    this.httpServiceService.sendMail('/api/v1/sendEmail', user).subscribe((response) => {
+    this.httpServiceService.sendMail('api/v1/sendMail', user).subscribe((response) => {
       console.log(response, 'response');
     });
   }

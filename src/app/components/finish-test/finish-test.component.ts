@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ChartType, ChartOptions } from 'chart.js';
 import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip } from 'ng2-charts';
 
-import { TestServiceService } from '../Shared/test-service.service';
+import { TestServiceService } from '../../Shared/test-service.service';
 
 @Component({
   selector: 'app-finish-test',

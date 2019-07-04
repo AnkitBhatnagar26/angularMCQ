@@ -6,10 +6,10 @@ import { ChartsModule } from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { McqComponent } from './mcq/mcq.component';
-import { TestComponentComponent } from './test-component/test-component.component';
-import { CaptionCarouselComponent } from './caption-carousel/caption-carousel.component';
-import { FinishTestComponent } from './finish-test/finish-test.component';
+import { McqComponent } from './components/mcq/mcq.component';
+import { TestComponentComponent } from './components/test-component/test-component.component';
+import { CaptionCarouselComponent } from './components/caption-carousel/caption-carousel.component';
+import { FinishTestComponent } from './components/finish-test/finish-test.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { FinishTestComponent } from './finish-test/finish-test.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ChartsModule
+    ChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
