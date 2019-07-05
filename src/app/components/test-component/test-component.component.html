@@ -4,54 +4,61 @@
       <video #video id="video" width="200" height="200" autoplay></video>
     </div>
     <canvas #canvas id="canvas" width="640" height="480"></canvas>
-    <form>
-      <div class="form-group">
-        <nav aria-label="Page navigation example">
-          <ul class="pagination justify-content-center">
-            <li class="page-item" *ngFor="let q of questions" [class.active]="q.givenAns">
-              <a class="page-link" (click)="openQuestion(q)">{{q.id}}</a>
-            </li>
-          </ul> 
-        </nav>
-        <div class="alert alert-danger" role="alert">
-          Please do not press browser back button. Otherwise your exam will start again. Have Fun :)
-        </div>
-        <app-caption-carousel>
-          <div *ngFor="let q of questions;let i = index">
-            <div [ngClass]="{'active': i === slideIndex}" class="carousel-item">
-              <div class="carousel-data">
-                <h2>Question No. {{q.id}}</h2>
-                <div class="container">
-                  <p class="lead">
-                    {{q.question}}
-                  </p>
-                  <div class="custom-control custom-radio"
-                    *ngFor="let opt of q.options; let in = index;trackBy:trackByIndex;">
-                    <input type="radio" class="custom-control-input" id="defaultGroupExample{{q.id}}{{in}}"
-                      value="{{opt}}" name="defaultGroupExample{{i}}"
-                      (change)="onRadioChange(opt, q.id)">
-                    <label class="custom-control-label" for="defaultGroupExample{{q.id}}{{in}}">{{opt}}</label>
-                  </div>
-                </div>
+    <div class="question-container">
+      <div class="alert alert-danger" role="alert">
+        Please do not press browser back button. Otherwise your exam will start again. Have Fun :)
+      </div>
+      <app-caption-carousel>
+        <div [ngClass]="{'active': i === slideIndex}" class="carousel-item" *ngFor="let q of questions;let i = index">
+          <div class="carousel-data">
+            <h2>Question No. {{q.id}}</h2>
+            <div class="container">
+              <p class="lead">
+                {{q.question}}
+              </p>
+              <div class="custom-control custom-radio"
+                *ngFor="let opt of q.options; let in = index;trackBy:trackByIndex;">
+                <input type="radio" class="custom-control-input" id="defaultGroupExample{{q.id}}{{in}}" value="{{opt}}"
+                  name="defaultGroupExample{{i}}" (change)="onRadioChange(opt, q.id)">
+                <label class="custom-control-label" for="defaultGroupExample{{q.id}}{{in}}">{{opt}}</label>
               </div>
             </div>
           </div>
-        </app-caption-carousel>
-        <div class="form-bottom">
-          <button type="button" class="btn btn-outline-secondary" [disabled]="previousBtnDisabled()"
-            (click)="previousSlide()">Previous</button>
-
-          <div *ngIf="this.slideIndex !== this.questions.length - 1; else notShow">
-            <button type="button" class="btn btn-primary" (click)="nextSlide()">Next</button>
-          </div>
-
-          <ng-template #notShow>
-            <button type="button" class="btn btn-primary" (click)="finishTest()">Finsih
-              Test</button>
-          </ng-template>
         </div>
+      </app-caption-carousel>
+
+      <!-- <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a> -->
+
+      <div class="form-bottom">
+        <a type="button" href="#carouselExampleControls" data-slide="prev" class="btn btn-outline-secondary">
+          Previous
+        </a>
+
+        <div *ngIf="this.slideIndex !== this.questions.length - 1; else notShow">
+          <a type="button" href="#carouselExampleControls" data-slide="next" class="btn btn-primary">Next</a>
+        </div>
+
+        <ng-template #notShow>
+          <a type="button" href="#carouselExampleControls" data-slide="next" class="btn btn-primary"
+            (click)="finishTest()">Finsih
+            Test</a>
+        </ng-template>
       </div>
-    </form>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li data-target="#carouselExampleControls" [attr.data-slide-to]="i" class="page-item"
+            *ngFor="let q of questions;let i=index" [class.answersGiven]="q.givenAns">
+            <a class="page-link">{{q.id}}</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </div>
 </div>
-

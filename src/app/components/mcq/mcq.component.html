@@ -1,59 +1,67 @@
-<div class="container">
-  <div class="basic-instructions">
-    <div class="jumbotron">
-      <div class="row">
-        <div class="col-sm-4">
-          <div class="row ques-height">
-            <div class="col">
-              <p>Total number of questions</p>
-              <p>Time(in mins)</p>
-            </div>
-            <div class="col text-right">
-              <p><strong>{{questions.length}}</strong></p>
-              <p><strong>20</strong></p>
-            </div>
-          </div>
-          <a class="btn btn-primary btn-lg btn-block" routerLink="/startTest">Start</a>
+<div class="jumbotron hero-banner">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="header-wrapper text-center">
+          <h1 class="display-3">MCQ Test</h1>
+          <p class="lead">
+            Push yourself, Because no one else is going to do it for you...
+          </p>
         </div>
-        <div class="col-sm-4">
-          <div class="card text-center">
-            <div class="card-header">
-              Newly Added
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">Quotes</h5>
-              <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <p class="card-text">Of all the options, <em>'all of the above'</em> and <em>'none of the
-                        above'</em> are the most confusing ones in MCQ!</p>
-                  </div>
-                  <div class="carousel-item">
-                    <p class="card-text">We belong to the generation where, life is a multiple choice question paper and
-                      minds are OMR sheets.</p>
-                  </div>
-                  <div class="carousel-item">
-                    <p class="card-text">I'm straight one word answer. Not a multiple choice question.</p>
-                  </div>
+      </div>
+      <div class="col">
+        <img src="../assets/images/testIO-logo-rgb-2.png" class="img-fluid" alt="Responsive image">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="row ques-height">
+          <div class="col">
+            <p>Total number of questions</p>
+            <p>Time(in mins)</p>
+          </div>
+          <div class="col text-right">
+            <p><strong>{{questions.length}}</strong></p>
+            <p><strong>20</strong></p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card text-center">
+          <div class="card-header">
+            <h5 class="card-title">New Added Quotes</h5>
+          </div>
+          <div class="card-body">
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <p class="card-text">Of all the options, <em>'all of the above'</em> and <em>'none of the
+                      above'</em> are the most confusing ones in MCQ!</p>
+                </div>
+                <div class="carousel-item">
+                  <p class="card-text">We belong to the generation where, life is a multiple choice question paper and
+                    minds are OMR sheets.</p>
+                </div>
+                <div class="carousel-item">
+                  <p class="card-text">I'm straight one word answer. Not a multiple choice question.</p>
                 </div>
               </div>
-              <!-- <p class="card-text">Of all the options, <em>'all of the above'</em> and <em>'none of the above'</em> are the most confusing ones in MCQ!</p> -->
             </div>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="instruc">
-            <h2>Instructions</h2>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Quiz Time limit is 10 minutes</li>
-              <li class="list-group-item">This Mock Test has <mark>20</mark> Questions</li>
-              <li class="list-group-item">Each Question is of 1 marks so total 20 marks</li>
-              <li class="list-group-item">Multiple Choice Questions with only ONE valid answer</li>
-            </ul>
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleSlidesOnly" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleSlidesOnly" data-slide-to="1"></li>
+                <li data-target="#carouselExampleSlidesOnly" data-slide-to="2"></li>
+              </ol>
           </div>
         </div>
       </div>
     </div>
-
+    <div class="row text-center button-wrapper">
+      <div class="col">
+        <a class="btn btn-secondary btn-lg custom-button" routerLink="/startTest">Start test now <i
+            class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
   </div>
 </div>

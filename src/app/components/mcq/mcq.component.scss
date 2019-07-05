@@ -1,3 +1,51 @@
+
+.hero-banner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+}
+
+.jumbotron.hero-banner {
+  background-color: transparent;
+  margin-bottom: 0;
+  padding: 20px 0;
+}
+
+.card-header {
+  background-color: #5A4495;
+  color: #fff;
+  margin: 0;
+
+  .card-title {
+    margin: 0;
+  }
+}
+
+.carousel-indicators  {
+  margin: 0;
+
+  li {
+    background-color: #5A4495;
+  }
+}
+
+.header-wrapper {
+  margin: 40px 0;
+}
+
+.button-wrapper {
+  margin-top: 20px;
+}
+
+.custom-button {
+  background: #5A4495;
+  border-radius: 20px;
+  outline: 0;
+  width: 50%;
+}
+
 .list-group-flush .list-group-item {
   background: transparent;
 }
@@ -11,8 +59,8 @@
 }
 
 .card-body {
-  min-height: 150px;
-  height: 150px;
+  min-height: 100px;
+  height: 100px;
 }
 
 @media screen and (max-width: 480px) {

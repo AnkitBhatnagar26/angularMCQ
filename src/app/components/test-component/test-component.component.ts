@@ -46,21 +46,21 @@ export class TestComponentComponent implements OnInit {
       .subscribe(data => {
         this.questions = data.questions;
       });
-    this.interval = setInterval(() => {
-      this.capture();
-    }, 2000);
+    // this.interval = setInterval(() => {
+    //   this.capture();
+    // }, 2000);
   }
 
 
   public ngAfterViewInit() {
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices
-        .getUserMedia({ video: true })
-        .then((stream) => {
-          this.video.nativeElement.srcObject = stream;
-          return this.video.nativeElement.play();
-        })
-    }
+    // if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    //   navigator.mediaDevices
+    //     .getUserMedia({ video: true })
+    //     .then((stream) => {
+    //       this.video.nativeElement.srcObject = stream;
+    //       return this.video.nativeElement.play();
+    //     })
+    // }
   }
 
   public capture() {

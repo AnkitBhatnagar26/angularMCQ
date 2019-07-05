@@ -1,4 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
-body {
-    background-color: #A5D8F3 !important;
+body::before {
+  content: "";
+  background: url(./assets/images/background-2633962_960_720.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100%;
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+body::after {
+  content: "";
+  background: url(./assets/images/leone-venter-VieM9BdZKFo-unsplash.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100%;
+  opacity: 0.6;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
 }
