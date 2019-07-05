@@ -18,3 +18,4 @@ export class McqComponent implements OnInit {
   }
 
 }
+
