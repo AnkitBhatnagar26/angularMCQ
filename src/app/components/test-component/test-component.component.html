@@ -5,9 +5,6 @@
     </div>
     <canvas #canvas id="canvas" width="640" height="480"></canvas>
     <div class="question-container">
-      <div class="alert alert-danger" role="alert">
-        Please do not press browser back button. Otherwise your exam will start again. Have Fun :)
-      </div>
       <app-caption-carousel>
         <div [ngClass]="{'active': i === slideIndex}" class="carousel-item" *ngFor="let q of questions;let i = index">
           <div class="carousel-data">
@@ -37,16 +34,17 @@
       </a> -->
 
       <div class="form-bottom">
-        <a type="button" href="#carouselExampleControls" data-slide="prev" class="btn btn-outline-secondary">
+        <a type="button" href="#carouselExampleControls" data-slide="prev" class="btn btn-prev">
           Previous
         </a>
 
         <div *ngIf="this.slideIndex !== this.questions.length - 1; else notShow">
-          <a type="button" href="#carouselExampleControls" data-slide="next" class="btn btn-primary">Next</a>
+          <a type="button" href="#carouselExampleControls" data-slide="next" (click)="nextSlide()"
+            class="btn btn-next">Next</a>
         </div>
 
         <ng-template #notShow>
-          <a type="button" href="#carouselExampleControls" data-slide="next" class="btn btn-primary"
+          <a type="button" href="#carouselExampleControls" data-slide="next" class="btn btn-next"
             (click)="finishTest()">Finsih
             Test</a>
         </ng-template>

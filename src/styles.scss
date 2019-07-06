@@ -1,4 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~ngx-toastr/toastr.css";
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+%main-colors {
+  background-color: #973cbf;
+  border-color: #973cbf;
+  color: #fff;
+}
+
 body::before {
   content: "";
   background: url(./assets/images/background-2633962_960_720.jpg);
@@ -29,42 +38,8 @@ body::after {
   z-index: -1;
 }
 
-.btn-outline-secondary.disabled,
-.btn-outline-secondary:disabled {
-  color: #973cbf;
-  border-color: #973cbf;
-}
-
-[type="button"]:not(:disabled),
-[type="reset"]:not(:disabled),
-[type="submit"]:not(:disabled),
-button:not(:disabled),
-.btn-outline-secondary:not(:disabled):not(.disabled).active,
-.btn-outline-secondary:not(:disabled):not(.disabled):active,
-.show > .btn-outline-secondary.dropdown-toggle {
-  background-color: #973cbf;
-  border-color: #973cbf;
-  color: #fff;
-}
-
-.btn-outline-secondary.focus,
-.btn-outline-secondary:focus,
-.btn-primary.focus,
-.btn-primary:focus,
-.btn-outline-secondary:not(:disabled):not(.disabled).active,
-.btn-outline-secondary:not(:disabled):not(.disabled):active,
-.show > .btn-outline-secondary.dropdown-toggle,
-.btn-primary:not(:disabled):not(.disabled).active,
-.btn-primary:not(:disabled):not(.disabled):active,
-.show > .btn-primary.dropdown-toggle {
-  box-shadow: none;
-}
-
-.custom-control-input:checked ~ .custom-control-label::before,
-.btn-primary,
-.btn-primary:not(:disabled):not(.disabled).active,
-.btn-primary:not(:disabled):not(.disabled):active,
-.show > .btn-primary.dropdown-toggle {
-  background-color: #973cbf;
-  border-color: #973cbf;
+.question-container {
+  .custom-control-input:checked ~ .custom-control-label::before {
+    @extend %main-colors;
+  }
 }

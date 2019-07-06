@@ -1,3 +1,10 @@
+
+%main-colors {
+  background-color: #973cbf;
+  border-color: #973cbf;
+  color: #fff;
+}
+
 .startTest {
   padding: 50px 0;
 }
@@ -10,7 +17,7 @@
 }
 
 .question-container {
-  background: rgba($color: #ff8fcf, $alpha: 0.4);
+  background: rgba($color: #D9EB4B, $alpha: 0.3);
   padding: 30px;
 
   p.lead {
@@ -37,15 +44,24 @@ video {
 
   &.answersGiven {
     .page-link {
-      background-color: #973cbf;
-      border-color: #973cbf;
-      color: #fff;
+      @extend %main-colors;
     }
   }
 }
 
 .page-link {
   border: 0;
+}
+
+.btn-prev,
+.btn-next {
+  @extend %main-colors;
+  -webkit-appearance: none;
+}
+
+.btn-prev:focus,
+.btn-next:focus {
+  box-shadow: none;
 }
 
 @media screen and (max-width: 480px) {

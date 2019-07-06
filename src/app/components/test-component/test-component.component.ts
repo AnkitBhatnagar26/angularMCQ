@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { PlatformLocation } from '@angular/common';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
 import { HttpServiceService } from '../../Shared/http-service.service';
 import { TestServiceService } from '../../Shared/test-service.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-test-component',
@@ -25,19 +27,23 @@ export class TestComponentComponent implements OnInit {
   answers: Array<{ question: number, answer: string }> = [];
   slideIndex: number = 0;
 
-  interval;
+  interval: any;
+  questionContainer: any
 
   constructor(
     private router: Router,
     private httpServiceService: HttpServiceService,
     private testServiceService: TestServiceService,
-    private location: PlatformLocation
+    private location: PlatformLocation,
+    private toastr: ToastrService
   ) {
-    location.onPopState((event) => {
+    this.location.onPopState(() => {
       this.router.navigateByUrl('/startTest');
       history.forward();
+      this.toastr.warning(' Otherwise your exam will start again.', 'Please do not press browser back button');
     });
     this.captures = [];
+    this.questionContainer = document.getElementsByClassName('question-container');
   }
 
 
@@ -73,21 +79,24 @@ export class TestComponentComponent implements OnInit {
   }
 
   nextSlide() {
-    if (this.slideIndex === this.questions.length - 1)
-      return;
-    this.slideIndex++;
+    var colors = ['#08F7FE33', '#09FBD333', '#FE53BB33', '#FFACFC33', '#75D5FD33', '#FDC7D733', '#13CA9180'];
+    this.questionContainer[0].style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
 
-    this.questions.map((item) => {
-      this.answers.map((item1) => {
-        if (item.id === item1.question) {
-          if (item1.answer === item.answer) {
-            return item1['givenAnswer'] = true;
-          } else {
-            return item1['givenAnswer'] = false;
-          }
-        }
-      });
-    })
+    // if (this.slideIndex === this.questions.length - 1)
+    //   return;
+    // this.slideIndex++;
+
+    // this.questions.map((item) => {
+    //   this.answers.map((item1) => {
+    //     if (item.id === item1.question) {
+    //       if (item1.answer === item.answer) {
+    //         return item1['givenAnswer'] = true;
+    //       } else {
+    //         return item1['givenAnswer'] = false;
+    //       }
+    //     }
+    //   });
+    // })
   }
 
   previousSlide() {
