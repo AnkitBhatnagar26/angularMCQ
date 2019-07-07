@@ -14,7 +14,7 @@ import { CommonServiceService } from '../../Shared/common-service.service';
   styleUrls: ['./test-component.component.scss']
 })
 export class TestComponentComponent implements OnInit {
-
+  carousel;
   groupOfDefault: boolean;
 
   @ViewChild("video", { static: false })
@@ -59,6 +59,11 @@ export class TestComponentComponent implements OnInit {
 
 
   public ngAfterViewInit() {
+    this.carousel = document.getElementById('carouselExampleControls');
+    console.log(this.carousel, 'this.carousel')
+    // this.carousel.addeventListener('slide.bs.carousel', function(){
+    //   console.log('sliding');
+    // })
     // if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     //   navigator.mediaDevices
     //     .getUserMedia({ video: true })
@@ -78,31 +83,36 @@ export class TestComponentComponent implements OnInit {
     this.captures.push(this.canvas.nativeElement.toDataURL("image/png"));
   }
 
-  nextSlide() {
+  randomBgColor() {
     var colors = ['#08F7FE33', '#09FBD333', '#FE53BB33', '#FFACFC33', '#75D5FD33', '#FDC7D733', '#13CA9180'];
     this.questionContainer[0].style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+  }
 
-    // if (this.slideIndex === this.questions.length - 1)
-    //   return;
-    // this.slideIndex++;
+  nextSlide() {
 
-    // this.questions.map((item) => {
-    //   this.answers.map((item1) => {
-    //     if (item.id === item1.question) {
-    //       if (item1.answer === item.answer) {
-    //         return item1['givenAnswer'] = true;
-    //       } else {
-    //         return item1['givenAnswer'] = false;
-    //       }
-    //     }
-    //   });
-    // })
+    if (this.slideIndex === this.questions.length - 1)
+      return;
+    this.slideIndex++;
+    this.randomBgColor();
+
+    this.questions.map((item) => {
+      this.answers.map((item1) => {
+        if (item.id === item1.question) {
+          if (item1.answer === item.answer) {
+            return item1['givenAnswer'] = true;
+          } else {
+            return item1['givenAnswer'] = false;
+          }
+        }
+      });
+    })
   }
 
   previousSlide() {
     if (this.slideIndex === 0)
       return;
     this.slideIndex--;
+    this.randomBgColor();
   }
 
   previousBtnDisabled() {
@@ -126,7 +136,7 @@ export class TestComponentComponent implements OnInit {
             "captures": this.captures
           };
           this.testServiceService.setDetails(detailsObj);
-          this.router.navigate(['/', 'finishTest']);
+          this.router.navigate(['finishTest']);
           this.sendHttpMail();
         })
     }
@@ -144,6 +154,7 @@ export class TestComponentComponent implements OnInit {
   }
 
   onRadioChange(answer: string, question: number) {
+    console.log(answer, question);
     this.questions[this.slideIndex]['givenAns'] = true;
     this.answers.map((item, index) => {
       if (item.question == question) {
@@ -151,12 +162,12 @@ export class TestComponentComponent implements OnInit {
       }
     });
 
-    this.answers.push({ question, answer })
+    this.answers.push({ question, answer });
+    console.log(this.questions, this.answers, this.slideIndex)
   }
 
   trackByIndex(index: number, obj: any): any {
     return index;
   }
-
 
 }

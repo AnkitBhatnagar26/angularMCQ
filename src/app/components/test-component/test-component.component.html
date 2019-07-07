@@ -6,35 +6,36 @@
     <canvas #canvas id="canvas" width="640" height="480"></canvas>
     <div class="question-container">
       <app-caption-carousel>
-        <div [ngClass]="{'active': i === slideIndex}" class="carousel-item" *ngFor="let q of questions;let i = index">
-          <div class="carousel-data">
-            <h2>Question No. {{q.id}}</h2>
-            <div class="container">
-              <p class="lead">
-                {{q.question}}
-              </p>
-              <div class="custom-control custom-radio"
-                *ngFor="let opt of q.options; let in = index;trackBy:trackByIndex;">
-                <input type="radio" class="custom-control-input" id="defaultGroupExample{{q.id}}{{in}}" value="{{opt}}"
-                  name="defaultGroupExample{{i}}" (change)="onRadioChange(opt, q.id)">
-                <label class="custom-control-label" for="defaultGroupExample{{q.id}}{{in}}">{{opt}}</label>
+        <div class="carousel-inner">
+          <div [ngClass]="{'active': i === slideIndex}" class="carousel-item" *ngFor="let q of questions;let i = index">
+            <div class="carousel-data">
+              <h2>Question No. {{q.id}}</h2>
+              <div class="container">
+                <p class="lead">
+                  {{q.question}}
+                </p>
+                <div class="custom-control custom-radio"
+                  *ngFor="let opt of q.options; let in = index;trackBy:trackByIndex;">
+                  <input type="radio" class="custom-control-input" id="defaultGroupExample{{q.id}}{{in}}"
+                    value="{{opt}}" name="defaultGroupExample{{i}}" (change)="onRadioChange(opt, q.id)">
+                  <label class="custom-control-label" for="defaultGroupExample{{q.id}}{{in}}">{{opt}}</label>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </app-caption-carousel>
       <div class="form-bottom">
-        <a type="button" href="#carouselExampleControls" data-slide="prev" class="btn btn-prev">
+        <a [class.disabledClick]="previousBtnDisabled()" href="javascript:void(0);" (click)="previousSlide()"
+          class="btn btn-prev">
           Previous
         </a>
-
         <div *ngIf="this.slideIndex !== this.questions.length - 1; else notShow">
-          <a type="button" href="#carouselExampleControls" data-slide="next" (click)="nextSlide()"
+          <a type="button" href="javascript:void(0);" (click)="nextSlide()"
             class="btn btn-next">Next</a>
         </div>
-
         <ng-template #notShow>
-          <a type="button" href="#carouselExampleControls" data-slide="next" class="btn btn-next"
+          <a  href="javascript:void(0);" data-slide="next" class="btn btn-next"
             (click)="finishTest()">Finsih
             Test</a>
         </ng-template>

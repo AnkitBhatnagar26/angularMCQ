@@ -53,6 +53,13 @@ video {
   border: 0;
 }
 
+.disabledClick {
+ cursor: not-allowed;
+ pointer-events: none;
+ background: rgba($color: #973cbf, $alpha: 0.3);
+ color: #973cbf;
+}
+
 .btn-prev,
 .btn-next {
   @extend %main-colors;

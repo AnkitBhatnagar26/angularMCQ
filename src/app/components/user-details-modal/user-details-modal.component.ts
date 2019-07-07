@@ -22,14 +22,14 @@ export class UserDetailsModalComponent implements OnInit {
   ngAfterViewInit() {
     setTimeout(() => {
       this.openModal();
-    }, 2000);
+    }, 1000);
   }
 
   onSubmit() {
     console.log(this.model);
     this.commonServiceService.setUserLoggedIn();
     this.closeModal();
-    this.toastr.success('Your details will be saved with us.', 'Thank you for submitting!');
+    this.toastr.success('Your details will be saved with us.', 'You can start your test!');
   }
 
   openModal() {
