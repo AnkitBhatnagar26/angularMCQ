@@ -5,6 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 
 import { HttpServiceService } from '../../Shared/http-service.service';
 import { TestServiceService } from '../../Shared/test-service.service';
+import { QuestionArray } from '../../QuestionArray';
+import { CommonServiceService } from '../../Shared/common-service.service';
 
 @Component({
   selector: 'app-test-component',
@@ -23,7 +25,7 @@ export class TestComponentComponent implements OnInit {
 
   public captures: Array<any>;
 
-  questions: Array<{ id: number, givenAns: boolean, answer: string, question: string, options: Array<string>, type: string }> = [];
+  questions: QuestionArray[] = [];
   answers: Array<{ question: number, answer: string }> = [];
   slideIndex: number = 0;
 
@@ -35,7 +37,8 @@ export class TestComponentComponent implements OnInit {
     private httpServiceService: HttpServiceService,
     private testServiceService: TestServiceService,
     private location: PlatformLocation,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private commonServiceService: CommonServiceService
   ) {
     this.location.onPopState(() => {
       this.router.navigateByUrl('/startTest');
@@ -48,10 +51,7 @@ export class TestComponentComponent implements OnInit {
 
 
   ngOnInit() {
-    this.httpServiceService.getJSON('api/v1/questions')
-      .subscribe(data => {
-        this.questions = data.questions;
-      });
+    this.questions = this.commonServiceService.getQuestionsData();
     // this.interval = setInterval(() => {
     //   this.capture();
     // }, 2000);

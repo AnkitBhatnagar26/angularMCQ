@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpServiceService } from '../../Shared/http-service.service';
+import { CommonServiceService } from '../../Shared/common-service.service';
+import { QuestionArray } from '../../QuestionArray';
 
 @Component({
   selector: 'app-mcq',
@@ -7,13 +9,15 @@ import { HttpServiceService } from '../../Shared/http-service.service';
   styleUrls: ['./mcq.component.scss']
 })
 export class McqComponent implements OnInit {
-  questions: Array<{ question: string, options: Array<string>, type: string }> = [];
-  constructor(private httpServiceService: HttpServiceService) { }
+  questions: QuestionArray[] = [];
+  constructor(private httpServiceService: HttpServiceService, private commonServiceService: CommonServiceService) { }
 
   ngOnInit() {
     this.httpServiceService.getJSON('api/v1/questions')
       .subscribe(data => {
         this.questions = data.questions;
+        console.log(this.questions,'this.questions');
+        this.commonServiceService.setQuestionsData(this.questions);
       });
   }
 

@@ -63,6 +63,11 @@
   height: 100px;
 }
 
+.custom-nav-slider {
+  position: absolute;
+  bottom: -28px;
+}
+
 @media screen and (max-width: 480px) {
   .card,
   .instruc {
