@@ -39,7 +39,7 @@ body {
     font-size: 26px;
     margin: 0;
     font-weight: 400;
-    color: #5A4495;
+    color: #5a4495;
   }
 
   &-desc {
@@ -56,7 +56,7 @@ body {
   }
 
   &-button {
-    color: darken(#5A4495, 5%);
+    color: darken(#5a4495, 5%);
     font-family: "Nunito", sans-serif;
     font-size: 18px;
     cursor: pointer;
@@ -67,7 +67,7 @@ body {
     background: rgb(255, 255, 255);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.16);
     transition: 0.3s;
-    
+
     &:hover {
       border-color: rgba(255, 255, 255, 0.2);
       background: rgba(#fff, 0.8);
@@ -133,7 +133,7 @@ body {
   text-align: center;
 
   a {
-    color: #5A4495;
+    color: #5a4495;
   }
 }
 
@@ -143,13 +143,13 @@ body {
   border: 0;
   color: #fff;
   border-radius: 4px;
-  background: #5A4495;
+  background: #5a4495;
   font-family: "Nunito", sans-serif;
   transition: 0.3s;
   cursor: pointer;
 
   &:hover {
-    background: darken(#5A4495, 5%);;
+    background: darken(#5a4495, 5%);
   }
 }
 
@@ -159,7 +159,7 @@ body {
   font-family: "Nunito", sans-serif;
   font-weight: 600;
   letter-spacing: 0.7px;
-  color: darken(#5A4495, 5%);;;
+  color: darken(#5a4495, 5%);
   transition: 0.3s;
 }
 
@@ -186,10 +186,10 @@ body {
   }
 
   &:focus-within {
-    border-color: darken(#5A4495, 5%);
+    border-color: darken(#5a4495, 5%);
 
     .input-label {
-      color: rgba(#5A4495, 0.8);
+      color: rgba(#5a4495, 0.8);
     }
   }
 }
@@ -207,25 +207,6 @@ body {
   cursor: pointer;
 }
 
-.scroll-down {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  color: darken(#5A4495, 5%);
-  font-size: 32px;
-  font-weight: 800;
-  transform: translate(-50%, -50%);
-  svg {
-    margin-top: 16px;
-    width: 52px;
-    fill: currentColor;
-  }
-}
-
 .toast {
   opacity: 1 !important;
 }
@@ -241,7 +222,14 @@ body {
   font-style: italic;
 }
 
-@media(max-width: 750px) {
+.modal-container {
+  .input-button:disabled {
+    background: rgba($color: #973cbf, $alpha: 0.3);
+    color: #973cbf;
+  }
+}
+
+@media (max-width: 750px) {
   .modal-container {
     width: 90%;
   }

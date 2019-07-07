@@ -7,7 +7,7 @@
     <div class="question-container">
       <app-caption-carousel>
         <div class="carousel-inner">
-          <div [ngClass]="{'active': i === slideIndex}" class="carousel-item" *ngFor="let q of questions;let i = index">
+          <div [ngClass]="{'active': i === 0}" class="carousel-item" *ngFor="let q of questions;let i = index">
             <div class="carousel-data">
               <h2>Question No. {{q.id}}</h2>
               <div class="container">
@@ -26,17 +26,16 @@
         </div>
       </app-caption-carousel>
       <div class="form-bottom">
-        <a [class.disabledClick]="previousBtnDisabled()" href="javascript:void(0);" (click)="previousSlide()"
-          class="btn btn-prev">
+        <a [class.disabledClick]="previousBtnDisabled()" href="#carouselExampleControls" data-slide="prev"
+          (click)="previousSlide()" class="btn btn-prev">
           Previous
         </a>
         <div *ngIf="this.slideIndex !== this.questions.length - 1; else notShow">
-          <a type="button" href="javascript:void(0);" (click)="nextSlide()"
+          <a type="button" href="#carouselExampleControls" data-slide="next" (click)="nextSlide()"
             class="btn btn-next">Next</a>
         </div>
         <ng-template #notShow>
-          <a  href="javascript:void(0);" data-slide="next" class="btn btn-next"
-            (click)="finishTest()">Finsih
+          <a href="javascript:void(0);" data-slide="next" class="btn btn-next" (click)="finishTest()">Finsih
             Test</a>
         </ng-template>
       </div>

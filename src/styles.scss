@@ -38,6 +38,7 @@ body::after {
   z-index: -1;
 }
 
+
 .question-container {
   .custom-control-input:checked ~ .custom-control-label::before {
     @extend %main-colors;

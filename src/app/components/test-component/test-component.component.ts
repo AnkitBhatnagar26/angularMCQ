@@ -89,7 +89,6 @@ export class TestComponentComponent implements OnInit {
   }
 
   nextSlide() {
-
     if (this.slideIndex === this.questions.length - 1)
       return;
     this.slideIndex++;
